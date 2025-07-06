@@ -33,9 +33,12 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:profiles,email',
             'contact' => 'nullable|string',
+            'objectives' => 'nullable|string|max:500',
+            'birthdate' => 'required|date_format:m/d/Y', 
+            'age' => 'nullable|integer|min:0|max:120',
             'summary' => 'nullable|string',
             'profile_image' => 'nullable|image|max:2048',
-            'job_experiences' => 'nullable'            
+            'job_experiences' => 'nullable|array',          
         ]);
 
         $profile = new Profile($validated);
@@ -76,7 +79,10 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:profiles,email,' . $profile->id,
-            'contact' => 'nullable|string|max:20',
+            'contact' => 'nullable|string|max:11',
+            'objectives' => 'required|string|max:255',
+            'birthdate' => 'required|date_format:m/d/Y',
+            'age' => 'nullable|string|max:2',
             'summary' => 'nullable|string',
             'profile_image' => 'nullable|image|max:2048',
             'job_experiences' => 'nullable'            
